@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+  <bean id="emf" class=
+      "org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+  </bean>
+
+
+
+
+  <bean id="jpaVendorAdapter" 
+      class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+    <property name="database" value="HSQL" />
+    <property name="showSql" value="true"/>
+    <property name="generateDdl" value="false"/>
+    <property name="databasePlatform" 
+              value="org.hibernate.dialect.HSQLDialect" />
+  </bean>
+
+<bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator"/>
+
+<bean class=
+ "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"
+/>
+
+
+  <bean id="transactionManager"
+      class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="emf" />
+  </bean>
+
+
+  <context:component-scan base-package="by.itm.webshop.persistence" /> 
+  <context:annotation-config/>
+</beans>
