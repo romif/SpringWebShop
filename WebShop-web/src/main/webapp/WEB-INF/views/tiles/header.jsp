@@ -4,7 +4,7 @@
 
 <div id="logo">
 	<a href="${pageContext.request.contextPath}/index" title="На главную">
-		<img src="${pageContext.request.contextPath}/pics/logo.png"
+		<img src="${pageContext.request.contextPath}/res/pics/logo.png"
 		alt="WebShop" />
 	</a>
 </div>

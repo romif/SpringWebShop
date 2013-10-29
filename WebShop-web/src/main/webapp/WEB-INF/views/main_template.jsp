@@ -5,7 +5,9 @@
 <html>
 <head>
 <title>WebShop</title>
-<link href="<s:url value="/" />/css/main.css" rel="stylesheet"
+<link href="<s:url value="/" />res/css/main.css" rel="stylesheet"
+	type="text/css" />
+<link href="<s:url value="/" />res/css/color.css" rel="stylesheet"
 	type="text/css" />
 </head>
 

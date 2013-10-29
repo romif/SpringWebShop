@@ -12,31 +12,31 @@
 				<ul>
 					<li><em> Дни обработки заказов: </em>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/pn.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/pn.gif"
 								alt="Понедельник">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/vt.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/vt.gif"
 								alt="Вторник">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/sr.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/sr.gif"
 								alt="Среда">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/tct.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/tct.gif"
 								alt="Четверг">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/pt.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/pt.gif"
 								alt="Пятница">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/sb.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/sb.gif"
 								alt="Суббота">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/vs.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/vs.gif"
 								alt="Воскресенье">
 						</div></li>
 					<li>Время обработки заказов: c 0:00 до 23:30</li>
@@ -58,31 +58,31 @@
 				<ul>
 					<li><em>Дни доставки:</em>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/pn.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/pn.gif"
 								alt="Понедельник">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/vt.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/vt.gif"
 								alt="Вторник">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/sr.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/sr.gif"
 								alt="Среда">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/tct.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/tct.gif"
 								alt="Четверг">
 						</div>
 						<div class="rab_den">
-							<img src="${pageContext.request.contextPath}/pics/pt.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/pt.gif"
 								alt="Пятница">
 						</div>
 						<div class="vih_den">
-							<img src="${pageContext.request.contextPath}/pics/sb.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/sb.gif"
 								alt="Суббота">
 						</div>
 						<div class="vih_den">
-							<img src="${pageContext.request.contextPath}/pics/vs.gif"
+							<img src="${pageContext.request.contextPath}/res/pics/vs.gif"
 								alt="Воскресенье">
 						</div></li>
 					<li>Время доставки заказов: c 9:00 до 23:00</li>

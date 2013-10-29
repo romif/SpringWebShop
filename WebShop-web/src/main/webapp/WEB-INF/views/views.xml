@@ -20,7 +20,7 @@
 <!--<end id="tile_template"/>-->
  
 <!--<start id="tile_home"/>-->
-   <definition name="home" extends="template">
+   <definition name="index" extends="template">
      <put-attribute name="centerColumn" value="/WEB-INF/views/centerColumn_Delivery.jsp" />
    </definition>  
 <!--<end id="tile_home"/>-->

@@ -35,11 +35,11 @@ public class HomeController {
 	}*/
 	
 	
-	@RequestMapping(value={"/","/home"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/","/index"}, method=RequestMethod.GET)
 	  public String showHomePage(Map<String, Object> model) {
 		logger.info("Welcome home!");
 	    //model.put("spittles",       spitterService.getRecentSpittles(spittlesPerPage));
-	    return "home";
+	    return "index";
 	  }
 	
 }

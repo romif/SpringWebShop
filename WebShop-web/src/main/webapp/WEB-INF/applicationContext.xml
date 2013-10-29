@@ -9,6 +9,6 @@
 	<context:component-scan base-package="by.itm.webshop.mvc" />
 	<context:annotation-config />
 	<mvc:annotation-driven />
-	<mvc:resources mapping="/**" location="/resources/" />
+	<mvc:resources mapping="/res/**" location="/resources/" />
 	
 </beans> 

@@ -5,5 +5,5 @@
 <div id="bottomBanner"><br><!--bottom admin banner--></div>
 <div id="counter">
 </div>
-<a href="http://topmobail.shop.by/info.xhtml" id="copy">Владелец сайта romif<br></a>
+<a href="" id="copy">Владелец сайта romif<br></a>
 </div>
