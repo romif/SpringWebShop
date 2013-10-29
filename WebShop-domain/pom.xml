@@ -27,5 +27,6 @@
   	<groupId>by.itm.webshop</groupId>
   	<artifactId>WebShop-parent</artifactId>
   	<version>1.0-SNAPSHOT</version>
+  	<relativePath>../WebShop-parent</relativePath>
   </parent>
 </project>

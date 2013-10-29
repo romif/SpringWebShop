@@ -14,7 +14,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/applicationContext.xml, /WEB-INF/webshop-security.xml
+			/WEB-INF/applicationContext.xml
+			/WEB-INF/webshop-security.xml
+			classpath:persistence-context.xml 
+			classpath:dataSource-context.xml
 		</param-value>
 	</context-param>
 

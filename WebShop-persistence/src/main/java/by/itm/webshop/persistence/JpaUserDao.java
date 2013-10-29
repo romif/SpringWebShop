@@ -12,19 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 import by.itm.webshop.domain.Order;
 import by.itm.webshop.domain.User;
 
-
 @Repository("userDao")
 @Transactional
 public class JpaUserDao implements UserDao {
-	private static final String ORDERS_BY_USER_LOGIN = 
-		      "SELECT s FROM Order s WHERE s.user.login = :login";
-	
+	private static final String ORDERS_BY_USER_LOGIN = "SELECT s FROM Order s WHERE s.user.login = :login";
+
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
 	public void addUser(User user) {
-		em.persist(user);	
+		em.persist(user);
 	}
 
 	@Override
@@ -40,38 +38,40 @@ public class JpaUserDao implements UserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Order> getOrdersForUser(User user) {
-		return (List<Order>) em.createQuery(ORDERS_BY_USER_LOGIN).
-		        setParameter("login", user.getLogin()).
-		        getResultList();
+		return (List<Order>) em.createQuery(ORDERS_BY_USER_LOGIN)
+				.setParameter("login", user.getLogin()).getResultList();
 	}
 
 	@Override
 	public Order addOrder(Order order) {
-		for (Order order1:getOrdersForUser(order.getUser())){
-			if (order1.getPhoneId()==order.getPhoneId()){
-				order1.setPhoneQty(order1.getPhoneQty()+order.getPhoneQty());
+		for (Order order1 : getOrdersForUser(order.getUser())) {
+			if (order1.getPhoneId() == order.getPhoneId()) {
+				order1.setPhoneQty(order1.getPhoneQty() + order.getPhoneQty());
 				em.merge(order1);
 				return order1;
 			}
 		}
-		em.persist(order);	
+		em.persist(order);
 		return order;
 	}
 
 	@Override
 	public void deleteUser(User user) {
 		try {
-		      em.remove(user);
-		} catch(DataAccessException e) {}
-		
+			em.remove(user);
+		} catch (DataAccessException e) {
+		}
+
 	}
 
 	@Override
 	public void deleteOrder(Order order) {
 		try {
-		      em.remove(order);
-		} catch(DataAccessException e) {};
-		
+			em.remove(order);
+		} catch (DataAccessException e) {
+		}
+		;
+
 	}
 
 	@Override
@@ -83,7 +83,5 @@ public class JpaUserDao implements UserDao {
 	public void updateOrder(Order order) {
 		em.merge(order);
 	}
-	
-	
 
 }

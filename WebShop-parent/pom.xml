@@ -52,6 +52,8 @@
 	</dependencies>
 	<modules>
 		<module>../WebShop-web</module>
+		<module>../WebShop-domain</module>
+		<module>../WebShop-persistence</module>
 	</modules>
 
 	<build>
