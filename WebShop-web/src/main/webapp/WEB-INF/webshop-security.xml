@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:beans="http://www.springframework.org/schema/beans" xmlns="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-http://www.springframework.org/schema/security
-http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<global-method-security secured-annotations="enabled" />
-
 
 	<http use-expressions="true">
 		<intercept-url pattern="/home*" access="hasRole(ROLE_USER,ROLE_ANONYMOUS)" />
@@ -17,18 +14,26 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 		<anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />
 	</http>
 
-
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="jimi" password="jimi" authorities="ROLE_USER, ROLE_ADMIN" />
-				<user name="bob" password="bob" authorities="ROLE_USER" />
-			</user-service>
+		<authentication-provider user-service-ref="userService">
+			<password-encoder hash="sha" />
 		</authentication-provider>
 	</authentication-manager>
+
+	<jdbc-user-service id="userService" data-source-ref="dataSource"
+		users-by-username-query="
+			SELECT LOGIN, PASSWORD, CASE ENABLED WHEN 1 THEN 'true' ELSE 'false' END 'ENABLED' 
+         	FROM USERSPASS
+         	WHERE LOGIN=?;"
+
+		authorities-by-username-query="
+		    SELECT u.LOGIN, r.ROLENAME 
+			FROM USERSPASS u, USERSROLE r
+			WHERE u.ID = r.USERID
+			AND u.LOGIN=?;" />
 
 
 </beans:beans>
 
-	
+
 

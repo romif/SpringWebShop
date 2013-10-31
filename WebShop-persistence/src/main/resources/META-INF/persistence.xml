@@ -1,0 +1,13 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+   version="1.0">
+   <persistence-unit name="userPU" transaction-type="RESOURCE_LOCAL">
+     <!--  <class>by.itm.webshop.domain.User</class>
+      <class>by.itm.webshop.domain.Order</class>
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+        <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      </properties> -->
+   </persistence-unit>
+</persistence>

@@ -25,6 +25,7 @@ public class User implements Serializable {
 	@Size(min = 3, max = 20, message = "Login must be between 3 and 20 characters long.")
 	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Login must be alphanumeric with no spaces")
 	private String login;
+	private String password;
 
 	private boolean isAdmin;
 	private String name;
@@ -35,7 +36,7 @@ public class User implements Serializable {
 	@Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Invalid email address.")
 	private String email;
 	@DateTimeFormat(pattern = " MMM dd, YYYY hh:mma")
-	private Date date;
+	private Date creationDate;
 
 	public User() {
 	}
@@ -57,6 +58,14 @@ public class User implements Serializable {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Column(name = "name")
@@ -114,12 +123,12 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "creationDate")
-	public Date getDate() {
-		return date;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreationDate(Date date) {
+		this.creationDate = date;
 	}
 
 	public boolean equals(Object obj) {

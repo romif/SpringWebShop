@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
 	<!-- <jdbc:embedded-database id="dataSource" type="H2">
@@ -9,11 +12,13 @@
 		<jdbc:script location="classpath:data.sql" />
 	</jdbc:embedded-database> -->
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/mydb"></property>
-		<property name="username" value="user"></property>
-		<property name="password" value="user"></property>
-	</bean>
+		<property name="url" value="jdbc:mysql://localhost:3306/webshop"></property>
+		<property name="username" value="webshopuser"></property>
+		<property name="password" value="webshop"></property>
+	</bean> -->
+	
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/WebShop" resource-ref="true"/>
 
 </beans>
