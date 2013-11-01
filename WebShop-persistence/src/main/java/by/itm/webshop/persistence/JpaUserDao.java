@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import by.itm.webshop.domain.Authority;
 import by.itm.webshop.domain.Order;
 import by.itm.webshop.domain.User;
 
@@ -82,6 +83,12 @@ public class JpaUserDao implements UserDao {
 	@Override
 	public void updateOrder(Order order) {
 		em.merge(order);
+	}
+
+	@Override
+	public void addUserRole(Authority authority) {
+		em.persist(authority);
+		
 	}
 
 }

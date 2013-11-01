@@ -4,16 +4,22 @@ import static javax.persistence.GenerationType.AUTO;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import static org.apache.commons.lang.builder.HashCodeBuilder.*;
 
 @Entity
 @Table(name = "users")
@@ -25,9 +31,10 @@ public class User implements Serializable {
 	@Size(min = 3, max = 20, message = "Login must be between 3 and 20 characters long.")
 	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Login must be alphanumeric with no spaces")
 	private String login;
+	@Size(min=3, max=20, message="Password must be between 3 and 20 characters long.")
 	private String password;
 
-	private boolean isAdmin;
+	private boolean enabled;
 	private String name;
 	private String surname;
 	private String patronymic;
@@ -37,6 +44,10 @@ public class User implements Serializable {
 	private String email;
 	@DateTimeFormat(pattern = " MMM dd, YYYY hh:mma")
 	private Date creationDate;
+	
+	private Set<Authority> authorities=new HashSet<Authority>();
+	
+	
 
 	public User() {
 	}
@@ -60,6 +71,7 @@ public class User implements Serializable {
 		this.login = login;
 	}
 
+	@Column(name="password")
 	public String getPassword() {
 		return password;
 	}
@@ -113,13 +125,13 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "isAdmin")
-	public boolean getIsAdmin() {
-		return isAdmin;
+	@Column(name = "enabled")
+	public boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setIsAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Column(name = "creationDate")
@@ -129,6 +141,15 @@ public class User implements Serializable {
 
 	public void setCreationDate(Date date) {
 		this.creationDate = date;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
 	}
 
 	public boolean equals(Object obj) {
@@ -148,7 +169,7 @@ public class User implements Serializable {
 	}
 
 	public int hashCode() {
-		return login.hashCode();
+		return reflectionHashCode(this);
 	}
 
 }

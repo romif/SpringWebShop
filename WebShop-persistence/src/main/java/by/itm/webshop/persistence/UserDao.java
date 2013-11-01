@@ -2,11 +2,14 @@ package by.itm.webshop.persistence;
 
 import java.util.List;
 
+import by.itm.webshop.domain.Authority;
 import by.itm.webshop.domain.Order;
 import by.itm.webshop.domain.User;
 
 public interface UserDao {
 	void addUser(User user);
+	
+	void addUserRole(Authority authority);
 
 	void saveUser(User user);
 

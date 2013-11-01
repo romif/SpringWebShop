@@ -3,9 +3,10 @@
    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
    version="1.0">
    <persistence-unit name="userPU" transaction-type="RESOURCE_LOCAL">
-     <!--  <class>by.itm.webshop.domain.User</class>
+      <class>by.itm.webshop.domain.User</class>
       <class>by.itm.webshop.domain.Order</class>
-      <properties>
+      <class>by.itm.webshop.domain.Authority</class>
+      <!-- <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
         <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       </properties> -->
