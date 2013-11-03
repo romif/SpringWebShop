@@ -12,8 +12,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -31,7 +34,7 @@ public class User implements Serializable {
 	@Size(min = 3, max = 20, message = "Login must be between 3 and 20 characters long.")
 	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Login must be alphanumeric with no spaces")
 	private String login;
-	@Size(min=3, max=20, message="Password must be between 3 and 20 characters long.")
+	//@Size(min=3, max=20, message="Password must be between 3 and 20 characters long.")
 	private String password;
 
 	private boolean enabled;
@@ -135,6 +138,7 @@ public class User implements Serializable {
 	}
 
 	@Column(name = "creationDate")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -143,7 +147,8 @@ public class User implements Serializable {
 		this.creationDate = date;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userid", referencedColumnName = "id")
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}

@@ -1,6 +1,5 @@
-package by.itm.webshop;
+package by.itm.webshop.service;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import by.itm.webshop.domain.Order;
@@ -8,13 +7,13 @@ import by.itm.webshop.domain.User;
 
 public interface UserService {
 	
-	void addUser(User user) throws NoSuchAlgorithmException;
-
 	void saveUser(User user);
 
-	User getUserById(long id);
+	User getUser(long id);
+	
+	User getUser(String login);
 
-	void deleteUser(User user);
+	void deleteUser(Long id);
 
 	List<Order> getOrdersForUser(User user);
 

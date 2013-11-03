@@ -3,13 +3,13 @@ package by.itm.webshop.persistence;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import by.itm.webshop.domain.Authority;
 import by.itm.webshop.domain.Order;
 import by.itm.webshop.domain.User;
 
@@ -17,6 +17,7 @@ import by.itm.webshop.domain.User;
 @Transactional
 public class JpaUserDao implements UserDao {
 	private static final String ORDERS_BY_USER_LOGIN = "SELECT s FROM Order s WHERE s.user.login = :login";
+	private static final String USER_FOR_LOGIN = "SELECT s FROM User s WHERE s.login = :login";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -34,6 +35,16 @@ public class JpaUserDao implements UserDao {
 	@Override
 	public User getUserById(long id) {
 		return em.find(User.class, id);
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		try {
+			return (User) em.createQuery(USER_FOR_LOGIN).setParameter("login", login)
+					.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
 	}
 
 	@Override
@@ -57,10 +68,11 @@ public class JpaUserDao implements UserDao {
 	}
 
 	@Override
-	public void deleteUser(User user) {
+	public void deleteUser(Long id) {
 		try {
-			em.remove(user);
+			em.remove(getUserById(id));
 		} catch (DataAccessException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -71,8 +83,6 @@ public class JpaUserDao implements UserDao {
 			em.remove(order);
 		} catch (DataAccessException e) {
 		}
-		;
-
 	}
 
 	@Override
@@ -83,12 +93,6 @@ public class JpaUserDao implements UserDao {
 	@Override
 	public void updateOrder(Order order) {
 		em.merge(order);
-	}
-
-	@Override
-	public void addUserRole(Authority authority) {
-		em.persist(authority);
-		
 	}
 
 }

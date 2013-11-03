@@ -1,12 +1,11 @@
-package by.itm.webshop;
+package by.itm.webshop.service;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +14,8 @@ import by.itm.webshop.domain.Order;
 import by.itm.webshop.domain.User;
 import by.itm.webshop.persistence.UserDao;
 
-@Service("userService")
+//@Service("userService")
+@Component
 @Transactional(propagation = Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
 	private final PasswordEncoder encoder = new StandardPasswordEncoder();
@@ -24,27 +24,31 @@ public class UserServiceImpl implements UserService {
 	UserDao userDao;
 
 	@Override
-	public void addUser(User user) throws NoSuchAlgorithmException {
-		user.setCreationDate(new Date());
-		user.setPassword(encoder.encode(user.getPassword()));
-		userDao.addUser(user);
-	}
-
-	@Override
 	public void saveUser(User user) {
-		user.setPassword(encoder.encode(user.getPassword()));
-		userDao.saveUser(user);
+		if (user.getId() == null) {
+			user.setPassword(encoder.encode(user.getPassword()));
+			userDao.addUser(user);
+		} else {
+			userDao.saveUser(user);
+		}
+
 	}
 
 	@Override
-	public User getUserById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public User getUser(long id) {
+		return userDao.getUserById(id);
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public User getUser(String login) {
+		return userDao.getUserByLogin(login);
 	}
 
 	@Override
-	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+	public void deleteUser(Long id) {
+		userDao.deleteUser(id);
 
 	}
 

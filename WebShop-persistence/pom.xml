@@ -39,6 +39,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.0.1.Final</version>
 		</dependency>
+		
 	</dependencies>
 	<parent>
 		<groupId>by.itm.webshop</groupId>
