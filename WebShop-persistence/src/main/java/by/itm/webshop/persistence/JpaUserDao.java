@@ -18,6 +18,7 @@ import by.itm.webshop.domain.User;
 public class JpaUserDao implements UserDao {
 	private static final String ORDERS_BY_USER_LOGIN = "SELECT s FROM Order s WHERE s.user.login = :login";
 	private static final String USER_FOR_LOGIN = "SELECT s FROM User s WHERE s.login = :login";
+	private static final String ORDER_FOR_USER_BY_PHONE_ID = "SELECT o FROM Order o WHERE o.phoneId = :phoneId AND o.user = :user";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -48,26 +49,6 @@ public class JpaUserDao implements UserDao {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public List<Order> getOrdersForUser(User user) {
-		return (List<Order>) em.createQuery(ORDERS_BY_USER_LOGIN)
-				.setParameter("login", user.getLogin()).getResultList();
-	}
-
-	@Override
-	public Order addOrder(Order order) {
-		for (Order order1 : getOrdersForUser(order.getUser())) {
-			if (order1.getPhoneId() == order.getPhoneId()) {
-				order1.setPhoneQty(order1.getPhoneQty() + order.getPhoneQty());
-				em.merge(order1);
-				return order1;
-			}
-		}
-		em.persist(order);
-		return order;
-	}
-
-	@Override
 	public void deleteUser(Long id) {
 		try {
 			em.remove(getUserById(id));
@@ -78,9 +59,36 @@ public class JpaUserDao implements UserDao {
 	}
 
 	@Override
-	public void deleteOrder(Order order) {
+	@SuppressWarnings("unchecked")
+	public List<Order> getOrdersForUser(User user) {
+		return (List<Order>) em.createQuery(ORDERS_BY_USER_LOGIN)
+				.setParameter("login", user.getLogin()).getResultList();
+	}
+
+	@Override
+	public Order getOrderForUserByPhoneId(User user, Long phoneId) {
 		try {
-			em.remove(order);
+			return (Order) em.createQuery(ORDER_FOR_USER_BY_PHONE_ID)
+					.setParameter("phoneId", phoneId).setParameter("user", user).getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
+	}
+
+	@Override
+	public void addOrder(Order order) {
+		em.persist(order);
+	}
+
+	@Override
+	public void updateOrder(Order order) {
+		em.merge(order);
+	}
+
+	@Override
+	public void deleteOrder(long id) {
+		try {
+			em.remove(getOrderById(id));
 		} catch (DataAccessException e) {
 		}
 	}
@@ -88,11 +96,6 @@ public class JpaUserDao implements UserDao {
 	@Override
 	public Order getOrderById(long id) {
 		return em.find(Order.class, id);
-	}
-
-	@Override
-	public void updateOrder(Order order) {
-		em.merge(order);
 	}
 
 }

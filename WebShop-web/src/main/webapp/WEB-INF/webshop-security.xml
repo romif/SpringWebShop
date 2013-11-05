@@ -14,21 +14,24 @@
 		<anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />
 	</http>
 
+	<beans:bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+	</beans:bean>
+
 	<authentication-manager>
 		<authentication-provider user-service-ref="userService">
-			<password-encoder hash="sha" />
+			<password-encoder ref="encoder" />
 		</authentication-provider>
 	</authentication-manager>
 
 	<jdbc-user-service id="userService" data-source-ref="dataSource"
 		users-by-username-query="
 			SELECT LOGIN, PASSWORD, CASE ENABLED WHEN 1 THEN 'true' ELSE 'false' END 'ENABLED' 
-         	FROM USERSPASS
+         	FROM USERS
          	WHERE LOGIN=?;"
 
 		authorities-by-username-query="
 		    SELECT u.LOGIN, r.ROLENAME 
-			FROM USERSPASS u, USERSROLE r
+			FROM USERS u, USERSROLES r
 			WHERE u.ID = r.USERID
 			AND u.LOGIN=?;" />
 

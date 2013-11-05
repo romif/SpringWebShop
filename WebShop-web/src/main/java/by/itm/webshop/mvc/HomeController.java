@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import by.itm.webshop.domain.Authority;
+import by.itm.webshop.domain.Order;
 import by.itm.webshop.domain.User;
 import by.itm.webshop.service.UserService;
 
@@ -60,7 +61,14 @@ public class HomeController {
 			user.setAuthorities(new HashSet<Authority>(Arrays
 					.asList((new Authority[] { authority }))));
 		}
-		userService.saveUser(user);
+		Order order=new Order(user);
+		order.setPhoneId(10L);
+		order.setQty(1);
+		//userService.saveUser(user);
+		logger.info("Adding order");
+		order=userService.addOrder(order);
+		logger.info("Deleting order");
+		userService.deleteOrder(order.getId());
 		// dao.addUserRole(authority);
 		// userService.deleteUser(user.getId());
 

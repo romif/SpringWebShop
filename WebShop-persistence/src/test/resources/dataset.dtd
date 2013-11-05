@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT dataset (users+ | orders+ )>
+<!ELEMENT users EMPTY> 
+<!ATTLIST users
+    name CDATA #REQUIRED
+>
+
+
+<!ELEMENT orders EMPTY> 
+<!ATTLIST orders
+    id CDATA #REQUIRED
+    userid CDATA #REQUIRED
+    phoneId CDATA #REQUIRED
+    qty CDATA #REQUIRED
+    creationDate CDATA #REQUIRED
+>
+<!ELEMENT table (column*, row*)>
+
+<!ELEMENT column (#PCDATA)>
+<!ELEMENT row (value | null )*>
+<!ELEMENT value (#PCDATA)>
+<!ELEMENT null EMPTY>

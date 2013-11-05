@@ -24,11 +24,15 @@ public class Order implements Serializable {
 	private Long id;
 	private User user;
 	private Long phoneId;
-	private int phoneQty;
+	private int qty;
 	@DateTimeFormat(pattern=" MMM dd, YYYY hh:mma")
 	private Date date;
 	
 	public Order(){
+	}
+	
+	public Order(User user){
+		this.user=user;
 	}
 	
 	
@@ -52,18 +56,18 @@ public class Order implements Serializable {
 	    this.phoneId = phoneId;
 	}
 	
-	@Column(name="phoneQty")
+	@Column(name="qty")
 	@NotNull
-	public int getPhoneQty() {
-		return phoneQty;
+	public int getQty() {
+		return qty;
 	}
 
-	public void setPhoneQty(int phoneQty) {
-		this.phoneQty = phoneQty;
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="userid")
 	public User getUser() {
 	    return this.user;
 	}
@@ -82,7 +86,7 @@ public class Order implements Serializable {
 	}
 	
 	public String toString(){
-		return "Order #"+id+" for "+user.getName()+", phoneId="+phoneId+" phoneQty="+phoneQty+" date= "+date;
+		return "Order #"+id+" for "+user.getName()+", phoneId="+phoneId+" phoneQty="+qty+" date= "+date;
 		
 	}
 	

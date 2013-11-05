@@ -18,11 +18,13 @@ public interface UserDao {
 
 	List<Order> getOrdersForUser(User user);
 
-	Order addOrder(Order order);
+	void addOrder(Order order);
 
 	void updateOrder(Order order);
 
 	Order getOrderById(long id);
 
-	void deleteOrder(Order order);
+	void deleteOrder(long id);
+
+	Order getOrderForUserByPhoneId(User user, Long phoneId);
 }

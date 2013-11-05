@@ -9,7 +9,7 @@ public interface UserService {
 	
 	void saveUser(User user);
 
-	User getUser(long id);
+	User getUser(Long id);
 	
 	User getUser(String login);
 
@@ -19,10 +19,8 @@ public interface UserService {
 
 	Order addOrder(Order order);
 
-	void updateOrder(Order order);
+	Order getOrderById(Long id);
 
-	Order getOrderById(long id);
-
-	void deleteOrder(Order order);
+	void deleteOrder(Long id);
 
 }
