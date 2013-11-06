@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="orders")
+@Table(name="orders", schema = "WEBSHOP")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 2L;
 	

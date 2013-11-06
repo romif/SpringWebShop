@@ -6,9 +6,10 @@
       <class>by.itm.webshop.domain.User</class>
       <class>by.itm.webshop.domain.Order</class>
       <class>by.itm.webshop.domain.Authority</class>
-      <!-- <properties>
-         <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-        <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-      </properties> -->
+      <properties>
+         <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+        <property name="hibernate.hbm2ddl.auto" value="create-drop"/> -->
+        		<property name="default_schema" value="WebShop" />
+      </properties>
    </persistence-unit>
 </persistence>

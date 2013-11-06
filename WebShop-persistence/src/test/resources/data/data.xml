@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE dataset SYSTEM "src/test/resources/dataset.dtd"> -->
+<dataset>
+	<orders id="1" userid="1" phoneId="111111" qty="1" />
+	<orders id="2" userid="1" phoneId="222222" qty="3" />
+	<users id="1" login="bob" password="bob" name="bob" />
+</dataset>

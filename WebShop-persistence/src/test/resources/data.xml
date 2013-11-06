@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE dataset SYSTEM "src/test/resources/dataset.dtd"> 
-<dataset>
-	<orders userid="2" phoneId="222222" qty="3" creationDate="2013-11-04"/>
-	<users id="2" login="bob" password="bob" name="bob" creationDate="2013-11-04"/>
-</dataset>

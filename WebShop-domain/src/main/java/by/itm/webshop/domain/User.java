@@ -23,9 +23,10 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import static org.apache.commons.lang.builder.HashCodeBuilder.*;
+import static org.apache.commons.lang.builder.EqualsBuilder.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "WEBSHOP")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +35,8 @@ public class User implements Serializable {
 	@Size(min = 3, max = 20, message = "Login must be between 3 and 20 characters long.")
 	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Login must be alphanumeric with no spaces")
 	private String login;
-	//@Size(min=3, max=20, message="Password must be between 3 and 20 characters long.")
+	// @Size(min=3, max=20,
+	// message="Password must be between 3 and 20 characters long.")
 	private String password;
 
 	private boolean enabled;
@@ -47,10 +49,8 @@ public class User implements Serializable {
 	private String email;
 	@DateTimeFormat(pattern = " MMM dd, YYYY hh:mma")
 	private Date creationDate;
-	
-	private Set<Authority> authorities=new HashSet<Authority>();
-	
-	
+
+	private Set<Authority> authorities = new HashSet<Authority>();
 
 	public User() {
 	}
@@ -74,7 +74,7 @@ public class User implements Serializable {
 		this.login = login;
 	}
 
-	@Column(name="password")
+	@Column(name = "password")
 	public String getPassword() {
 		return password;
 	}
@@ -158,7 +158,7 @@ public class User implements Serializable {
 	}
 
 	public boolean equals(Object obj) {
-		if (obj == this)
+		/*if (obj == this)
 			return true;
 		if (obj == null)
 			return false;
@@ -170,7 +170,8 @@ public class User implements Serializable {
 				return true;
 			else
 				return false;
-		}
+		}*/
+		return reflectionEquals(this, obj);
 	}
 
 	public int hashCode() {

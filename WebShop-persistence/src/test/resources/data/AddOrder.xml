@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<orders userid="1" phoneId="222222" qty="3" />
+	<orders userid="1" phoneId="333333" qty="3" />
+	<users login="bob" password="bob" name="bob" />
+</dataset>

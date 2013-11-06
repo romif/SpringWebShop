@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import by.itm.webshop.domain.Order;
 import by.itm.webshop.domain.User;
+import by.itm.webshop.persistence.OrderDao;
 import by.itm.webshop.persistence.UserDao;
 
 //@Service("userService")
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	OrderDao orderDao;
 
 	@Override
 	public void saveUser(User user) {
@@ -55,31 +59,31 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<Order> getOrdersForUser(User user) {
-		return userDao.getOrdersForUser(user);
+		return orderDao.getOrdersForUser(user);
 	}
 
 	@Override
 	public Order addOrder(Order newOrder) {
 		Order oldOrder;
-		if ((oldOrder = userDao.getOrderForUserByPhoneId(newOrder.getUser(), newOrder.getPhoneId())) != null) {
+		if ((oldOrder = orderDao.getOrderForUserByPhoneId(newOrder.getUser(), newOrder.getPhoneId())) != null) {
 			oldOrder.setQty(oldOrder.getQty() + newOrder.getQty());
-			userDao.updateOrder(oldOrder);
+			orderDao.updateOrder(oldOrder);
 			return oldOrder;
 		} else {
 			newOrder.setDate(new Date());
-			userDao.addOrder(newOrder);
+			orderDao.addOrder(newOrder);
 			return newOrder;
 		}
 	}
 
 	@Override
 	public Order getOrderById(Long id) {
-		return userDao.getOrderById(id);
+		return orderDao.getOrderById(id);
 	}
 
 	@Override
 	public void deleteOrder(Long id) {
-		userDao.deleteOrder(id);
+		orderDao.deleteOrder(id);
 
 	}
 
